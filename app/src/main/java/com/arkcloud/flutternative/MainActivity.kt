@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val flutterView = Flutter.createView(this, lifecycle, "routexxxx")
+        val flutterView = Flutter.createView(this, lifecycle, "route1")
         addContentView(flutterView, FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT))
 
@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
         MethodChannel(flutterView, PULL_CHANNEL).setMethodCallHandler { methodCall, result ->
             run {
                 if (methodCall.method == "refresh") {
-                    showtoast("原生")
+                    val name = methodCall.argument<String>("name")
+                    showtoast(name)
                     result.success("")
                 } else {
                     result.notImplemented()
@@ -50,8 +51,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun showtoast(s: String) {
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
+    private fun showtoast(s: String?) {
+        Toast.makeText(this, "原生Toast: $s", Toast.LENGTH_SHORT).show()
     }
 
 

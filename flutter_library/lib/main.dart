@@ -52,10 +52,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   //Flutter接收原生数据
   static const EventChannel eventChannel =
-      EventChannel('sample.flutter.io/get_name');
+  EventChannel('sample.flutter.io/get_name');
 
   static const MethodChannel methodChannel =
-      MethodChannel('sample.flutter.io/pull');
+  MethodChannel('sample.flutter.io/pull');
 
   String _name = 'unknown';
 
@@ -80,7 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _receiveData() {
-    var invokeMethod = methodChannel.invokeMethod('refresh');
+    var invokeMethod = methodChannel.invokeMethod(
+        'refresh', {"name": "yikwing"});
     print(invokeMethod);
   }
 
